@@ -1,0 +1,66 @@
+
+data:
+    dataset: "CIFAR10"
+    image_size: 32
+    channels: 3
+    random_flip: true
+    rescaled: true
+    num_workers: 2
+    num_classes: 10
+    num_train: 50000
+    num_test: 10000
+
+model:
+    model_type: "ncsnpp"
+    type: "simple"
+    in_channels: 3
+    out_ch: 3
+    ch: 128
+    ch_mult: [1, 2, 2, 2]
+    num_res_blocks: 4
+    attn_resolutions: [16, ]
+    dropout: 0.1
+    var_type: fixedlarge
+    ema_rate: 0.9999
+    ema: True
+    resamp_with_conv: True
+    fir: True
+    fir_kernel: [1,3,3,1]
+    skip_rescale: True
+    resblock_type: 'biggan'
+    progressive: 'none'
+    progressive_input: 'residual'
+    embedding_type: 'positional'
+    condition: True
+
+diffusion:
+    alpha: 1.8
+    beta_min: 0.1
+    beta_max: 15.0
+    cosine_s: 0.008
+    cosine_beta_max: 999.
+    schedule: 'cosine'
+    num_diffusion_timesteps: 1000
+
+training:
+    batch_size: 64
+    n_epochs: 4000
+    conditional: True
+    ckpt_store: 50000
+
+optim:
+    weight_decay: 0.000
+    optimizer: "Adam"
+    lr: 0.0001
+    mu: 0.9999
+    grad_clip: 1.0
+
+sampling:
+    sampling_steps: 64 # integer 1~
+    fid_batch_size: 333
+    batch_size: 64
+    fix_class: null # null or integer
+    trajectory: False
+
+
+
