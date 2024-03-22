@@ -129,7 +129,6 @@ def sampler(config,
 
 
 def fid_measure(config, args,train_loader,sde,model,rank):
-    # img_id = len(glob.glob(f"{args.image_folder}/*"))
     img_id =0
     print(f"starting from image {img_id}")
     total_n_samples = 2000
@@ -158,7 +157,6 @@ def fid_measure(config, args,train_loader,sde,model,rank):
             tvu.save_image(x[i], os.path.join(args.image_folder, f"{additional}.png"),dpi =500)
             img_id +=1
     if rank ==0:
-    #  fid_value = fid_score(dataset_path, args.image_folder, 50, device, num_workers=0)
      fid_value = fid_score(dataset_path, args.image_folder, 50, device, num_workers=0)
      print(f"FID with train dataset : {fid_value}")
      return fid_value
